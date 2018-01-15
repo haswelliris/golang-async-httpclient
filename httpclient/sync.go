@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/haswelliris/golang-async-httpclient/httpclient"
+	"github.com/haswelliris/golang-async-httpclient/service"
 )
 
-func Synchronous() [10]httpclient.Infomation {
+func Synchronous() [10]service.Infomation {
 	start := time.Now()
-	customer := httpclient.GetCustomers()
-	destinations := httpclient.GetDestinations(customer)
-	var infos [10]httpclient.Infomation
+	customer := service.GetCustomers()
+	destinations := service.GetDestinations(customer)
+	var infos [10]service.Infomation
 	for index, dest := range destinations {
-		q := httpclient.GetQuoting(dest)
-		w := httpclient.GetWeather(dest)
-		infos[index] = httpclient.Infomation{W: w, D: dest, Q: q}
+		q := service.GetQuoting(dest)
+		w := service.GetWeather(dest)
+		infos[index] = service.Infomation{W: w, D: dest, Q: q}
 	}
 	fmt.Println(time.Since(start))
 	return infos
